@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+</head>
+<body>
+  <form action="/calculateResults" method="get">
+    <label for="number">Weight:</label>
+    <input id="number" name="weight" type="number" step="any">
+    <label for="option">Type of Mail</label>
+    <select name="type">
+      <option value="stamped">Letters (Stamped)</option>
+      <option value="metered">Letters (Metered)</option>
+      <option value="large">Large Envelopes (Flats)</option>
+      <option value="retail">First-Class Package Service--Retail</option>
+    </select> 
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

@@ -11,7 +11,8 @@ function calculate(req, res) {
     large : "Large Envelopes (Flats)",
     retail : "First-Class Package Service—Retail"
   };
-  params = {weight: weight, type: typeSpelledOut[type], results: results};
+  var zone = 2;
+  params = {weight: weight, type: typeSpelledOut[type], results: results, zone: zone};
   res.render('pages/results', params);
 }
 

@@ -6,8 +6,12 @@
   <title>Results Page</title>
 </head>
 <body>
-  <p>The weight of your parcel was <%= weight %> lbs.</p>
-  <p>The type of parcel was <%= type %>.</p>
+  <p>The weight of your parcel is <%= weight %> lbs.</p>
+  <p>The type of parcel is <%= type %>.</p>
+  <p id="zone"></p>
+  <% if (zone != 0) { %>
+   <%= `The zone is ${zone}.`%>
+  <% } %>
   <p>The final price is $<%= results %>.</p>
 </body>
 </html>

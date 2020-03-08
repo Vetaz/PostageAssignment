@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Results Page</title>
+  <link rel="stylesheet" href="stylesheets/main.css">
 </head>
 <body>
   <p>The weight of your parcel is <%= weight %> lbs.</p>
   <p>The type of parcel is <%= type %>.</p>
-  <p id="zone"></p>
-  <% if (zone != 0) { %>
+  <% if (type == "First-Class Package Service—Retail") { %>
+    <p>
    <%= `The zone is ${zone}.`%>
+    </p>
   <% } %>
   <p>The final price is $<%= results %>.</p>
 </body>

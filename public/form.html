@@ -1,58 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form</title>
-  <style>
-    #error {
-      color: red;
-    }
-    html {
-      background-color: antiquewhite;
-    }
-    body, form {
-      display: flex;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="stylesheets/main.css">
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <h1>Rate Finder</h1>
+    <p>Type in the weight of your letter and select the type to find the rate for it.</p>
+    <form id="myForm" action="/calculateResults" method="get">
+      <label for="number">Weight:</label>
+      <input id="number" name="weight" type="number" step="any" />
+      <label for="option">Type of Mail</label>
+      <select name="type">
+        <option value="stamped">Letters (Stamped)</option>
+        <option value="metered">Letters (Metered)</option>
+        <option value="large">Large Envelopes (Flats)</option>
+        <option value="retail">First-Class Package Service--Retail</option>
+      </select>
+      <label class="zone" for="zone">Zone for First-Class Package Service--Retail</label>
+      <select class="zone" name="zone" id="zone">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
+      <button id="submit" type="submit">Submit</button>
+    </form>
+    <div id="error"></div>
+    <script>
+      window.addEventListener('load', zoneBlockNone);
+      // zone addition or deletion
+      document.getElementsByName("type")[0].addEventListener("change", zoneBlockNone);
 
-    }
-  </style>
-</head>
-<body>
-  <h1>Rate Finder</h1>
-  <p>Type in the weight of your letter and select the type to find the rate for it.</p>
-  <form id="myForm" action="/calculateResults" method="get">
-    <label for="number">Weight:</label>
-    <input id="number" name="weight" type="number" step="any">
-    <label for="option">Type of Mail</label>
-    <select name="type">
-      <option value="stamped">Letters (Stamped)</option>
-      <option value="metered">Letters (Metered)</option>
-      <option value="large">Large Envelopes (Flats)</option>
-      <option value="retail">First-Class Package Service--Retail</option>
-    </select> 
-    <select name="zone" id="zone">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-    <button id="submit" type="submit">Submit</button>
-  </form>
-  <div id="error"></div>
-  <script>
-    //form validation
-    document.getElementById("submit").addEventListener("click", function (event) {
-      var type = document.getElementsByName("type")[0].value;
-      var weight = document.getElementsByName("weight")[0].value;
-      if ((((type == 'stamped') || (type =='metered')) && ((weight > 3.5) || (weight < 0))) || 
-          (((type == 'large') || (type =='retail')) && ((weight > 13) || (weight < 0)))) {
-        event.preventDefault()
-        document.getElementById("error").innerHTML = "Weight and type are incompatible";
-      } else {
-        document.getElementById("error").innerHTML = "";
+      function zoneBlockNone () {
+        console.log(document.getElementsByName("type")[0].value);
+        if (document.getElementsByName("type")[0].value == "retail") {
+          for (item of document.getElementsByClassName("zone")) {
+            item.style.display = "block";
+          }
+        } else {
+          for (item of document.getElementsByClassName("zone")) {
+            item.style.display = "none";
+          }
+        }
       }
-    });
-  </script>
-</body>
+
+      //form validation
+      document.getElementById("submit").addEventListener("click", function(event) {
+        var type = document.getElementsByName("type")[0].value;
+        var weight = document.getElementsByName("weight")[0].value;
+        if (
+          ((type == "stamped" || type == "metered") && (weight > 3.5 || weight < 0)) ||
+          ((type == "large" || type == "retail") && (weight > 13 || weight < 0)) || (weight === "")
+        ) {
+          event.preventDefault();
+          document.getElementById("error").innerHTML = "Weight and type are incompatible";
+        } else {
+          document.getElementById("error").innerHTML = "";
+        }
+      });
+    </script>
+  </body>
 </html>
